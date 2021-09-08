@@ -13,9 +13,8 @@ import { Container } from '@material-ui/core';
 
 import { GlobalStyle } from '../styles/global-styles';
 
-import NavigationBar from './components/navigation-bar';
-
 import Routes from './routes';
+import MainLayout from './layouts/main-layout';
 
 export function App() {
   return (
@@ -27,10 +26,9 @@ export function App() {
         <meta name="description" content="A React Boilerplate application" />
       </Helmet>
 
-      <NavigationBar />
-      <Container>
+      <MainLayout>
         <Routes />
-      </Container>
+      </MainLayout>
       <GlobalStyle />
     </BrowserRouter>
   );

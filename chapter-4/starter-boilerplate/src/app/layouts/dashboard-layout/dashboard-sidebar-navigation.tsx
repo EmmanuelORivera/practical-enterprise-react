@@ -5,8 +5,10 @@ import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { Divider, ListSubheader } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
+import { PieChart as PieChartIcon } from 'react-feather';
 
 const DashboardSidebarNavigation = () => {
   const drawerWidth = 240;
@@ -61,8 +63,18 @@ const DashboardSidebarNavigation = () => {
             Logo
           </Link>
         </Toolbar>
+        <Divider />
         <div className={classes.drawerContainer}>
           <List>
+            <ListSubheader>Reports</ListSubheader>
+            <Link className={classes.link} to={`${url}`}>
+              <ListItem button>
+                <ListItemIcon>
+                  <PieChartIcon />
+                </ListItemIcon>
+                <ListItemText primary={'Dashboard'} />
+              </ListItem>
+            </Link>
             <Link className={classes.link} to={`${url}/settings-and-privacy`}>
               <ListItem button>
                 <ListItemIcon>
