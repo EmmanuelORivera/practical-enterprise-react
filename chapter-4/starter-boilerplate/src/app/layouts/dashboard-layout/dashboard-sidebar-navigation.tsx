@@ -1,14 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router';
 import { Link } from 'react-router-dom';
 import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import SettingsIcon from '@material-ui/icons/Settings';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Divider, ListSubheader } from '@material-ui/core';
+import { Collapse, Divider, ListSubheader } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import Toolbar from '@material-ui/core/Toolbar';
-import { PieChart as PieChartIcon } from 'react-feather';
+import {
+  PieChart as PieChartIcon,
+  ShoppingCart as ShoppingCartIcon,
+  ChevronUp as ChevronUpIcon,
+  ChevronDown as ChevronDownIcon,
+  List as ListIcon,
+  FilePlus as FilePlusIcon,
+  LogOut as LogOutIcon,
+} from 'react-feather';
 
 const DashboardSidebarNavigation = () => {
   const drawerWidth = 240;
@@ -39,6 +45,9 @@ const DashboardSidebarNavigation = () => {
         textDecoration: 'none',
         color: 'inherit',
       },
+      nested: {
+        paddingLeft: theme.spacing(4),
+      },
     }),
   );
 
@@ -46,6 +55,14 @@ const DashboardSidebarNavigation = () => {
   const { url } = useRouteMatch();
 
   useEffect(() => {}, []);
+
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {}, []);
+
+  const handleClick = () => {
+    setOpen(prevOpen => !prevOpen);
+  };
 
   return (
     <div className={classes.root}>
@@ -75,18 +92,38 @@ const DashboardSidebarNavigation = () => {
                 <ListItemText primary={'Dashboard'} />
               </ListItem>
             </Link>
-            <Link className={classes.link} to={`${url}/settings-and-privacy`}>
-              <ListItem button>
-                <ListItemIcon>
-                  <SettingsIcon />
-                </ListItemIcon>
-                <ListItemText primary={'settings and privacy'} />
-              </ListItem>
-            </Link>
+            <ListSubheader>Management</ListSubheader>
+            <ListItem button onClick={handleClick}>
+              <ListItemIcon>
+                <ShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Products" />
+              {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
+            </ListItem>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <Link className={classes.link} to={`${url}/list-products`}>
+                  <ListItem button className={classes.nested}>
+                    <ListItemIcon>
+                      <ListIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="List Products" />
+                  </ListItem>
+                </Link>
+                <Link className={classes.link} to={`${url}/create-product`}>
+                  <ListItem button className={classes.nested}>
+                    <ListItemIcon>
+                      <FilePlusIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Create Product" />
+                  </ListItem>
+                </Link>
+              </List>
+            </Collapse>
             <a className={classes.link} href={'/'}>
               <ListItem button>
                 <ListItemIcon>
-                  <ExitToAppIcon />
+                  <LogOutIcon />
                 </ListItemIcon>
                 <ListItemText primary={'logout'} />
               </ListItem>

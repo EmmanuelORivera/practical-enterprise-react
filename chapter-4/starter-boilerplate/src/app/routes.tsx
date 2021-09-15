@@ -28,10 +28,17 @@ const Routes = () => {
                   )}
                 />
                 <Route
+                  path={path + '/list-products'}
                   exact
-                  path={path + '/settings-and-privacy'}
                   component={lazy(() =>
-                    import('./views/dashboard/settings-and-privacity'),
+                    import('./views/dashboard/product/ProductListView'),
+                  )}
+                />
+                <Route
+                  exact
+                  path={path + '/create-product'}
+                  component={lazy(() =>
+                    import('./views/dashboard/product/ProductCreateView'),
                   )}
                 />
               </Switch>
