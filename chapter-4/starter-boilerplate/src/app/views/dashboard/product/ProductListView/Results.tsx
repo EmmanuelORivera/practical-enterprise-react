@@ -361,7 +361,7 @@ const Results = ({ className, products, ...rest }: Props) => {
             component="div"
             count={filteredProducts.length}
             onPageChange={handlePageChange}
-            onChangeRowsPerPage={handleLimitChange}
+            onRowsPerPageChange={handleLimitChange}
             page={page}
             rowsPerPage={limit}
             rowsPerPageOptions={[5, 10, 25]}

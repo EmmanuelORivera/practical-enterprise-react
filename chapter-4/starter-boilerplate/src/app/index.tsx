@@ -6,10 +6,11 @@
  * contain code that should be seen on all pages. (e.g. navigation bar)
  */
 
+import 'react-quill/dist/quill.snow.css';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
-import { Container } from '@material-ui/core';
+import { SnackbarProvider } from 'notistack';
 
 import { GlobalStyle } from '../styles/global-styles';
 
@@ -19,17 +20,19 @@ import MainLayout from './layouts/main-layout';
 export function App() {
   return (
     <BrowserRouter>
-      <Helmet
-        titleTemplate="%s - React Boilerplate"
-        defaultTitle="React Boilerplate"
-      >
-        <meta name="description" content="A React Boilerplate application" />
-      </Helmet>
+      <SnackbarProvider dense maxSnack={3}>
+        <Helmet
+          titleTemplate="%s - React Boilerplate"
+          defaultTitle="React Boilerplate"
+        >
+          <meta name="description" content="A React Boilerplate application" />
+        </Helmet>
 
-      <MainLayout>
-        <Routes />
-      </MainLayout>
-      <GlobalStyle />
+        <MainLayout>
+          <Routes />
+        </MainLayout>
+        <GlobalStyle />
+      </SnackbarProvider>
     </BrowserRouter>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   Backdrop,
   Box,
@@ -19,7 +19,7 @@ const ProductListView = () => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [open, setOpen] = useState(false);
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     handleToggle();
     try {
       const { data } = await getProductAxios();
@@ -28,7 +28,7 @@ const ProductListView = () => {
       console.error(err);
     }
     handleClose();
-  };
+  }, []);
 
   const handleClose = () => {
     setOpen(false);
@@ -36,9 +36,10 @@ const ProductListView = () => {
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
   };
+
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [fetchProducts]);
 
   return (
     <Page className={classes.root} title="Product List">

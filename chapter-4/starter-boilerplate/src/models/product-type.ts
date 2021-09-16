@@ -20,6 +20,6 @@ export type ProductType = {
   includesTaxes: boolean;
   isTaxable: boolean;
   productCode: string;
-  productSky: string;
+  productSku: string;
   salePrice: string;
 };
